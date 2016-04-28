@@ -1,0 +1,1707 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title>Algorithmia Developer Center</title>
+  <generator uri="https://github.com/jekyll/jekyll">Jekyll v2.5.3</generator>
+    <icon>/apple-touch-icon-precomposed.png</icon>
+  <subtitle>Resources tutorials and guides for Algorithmia.</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  <link href="/" rel="alternate" type="text/html"/>
+  <updated>2016-04-28T18:42:02+00:00</updated>
+  <id>/</id>
+  <author>
+    <name>Algorithmia</name>
+    <uri>/</uri>
+    <email>mia@algorithmia.com</email>
+  </author>
+
+  
+  <entry>
+    <title>The Ruby Client</title>
+    <link href="/clients/ruby/"/>
+    <updated>2016-04-28T15:00:38+00:00</updated>
+    <id>/clients/ruby</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      
+&lt;p&gt;Below, you’ll find a guide to the The Ruby Client. 
+        You can also find the source code directly on &lt;a href=&quot;https://github.com/algorithmiaio/algorithmia-ruby.git&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-algorithmia-ruby-client&quot;&gt;The Algorithmia Ruby Client&lt;/h1&gt;
+
+&lt;p&gt;The Algorithmia Ruby client is a wrapper for making calls to the Algorithmia API and Data API.&lt;/p&gt;
+
+&lt;p&gt;With Algorithmia, you can leverage algorithms written in any language by including them in your Ruby project with a simple API call! Browse the collection of algorithms available on &lt;a href=&quot;http://algorithmia.com&quot;&gt;Algorithmia.com&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
+&lt;p&gt;Add this line to your application’s Gemfile:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;algorithmia&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And then execute:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Or install it yourself as:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem install algorithmia&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;basic-usage&quot;&gt;Basic Usage&lt;/h2&gt;
+
+&lt;p&gt;To call to the API, the gem uses a client model. Create and configure a client object with your API key to start making requests.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;algorithmia&lt;/span&gt;
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-3&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# Create a new client instance &amp;amp; set your API key&lt;/span&gt;
+&lt;a name=&quot;True-4&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;client&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Algorithmia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;YOUR_API_KEY&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;a name=&quot;True-5&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-6&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;algorithm&lt;/span&gt;        &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;demo/Hello/0.1.1&amp;#39;&lt;/span&gt;
+&lt;a name=&quot;True-7&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;algorithm_result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;algo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;algorithm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;HAL 9000&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;
+&lt;a name=&quot;True-8&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;algorithm_result&lt;/span&gt;
+&lt;a name=&quot;True-9&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; Hello HAL 9000&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;algorithm-objects&quot;&gt;Algorithm Objects&lt;/h3&gt;
+
+&lt;p&gt;When you call &lt;code&gt;.algo&lt;/code&gt; on your client, it will return a new instance of &lt;code&gt;Algorithmia::Algorithm&lt;/code&gt;. On this object, you have the the following methods:
+- &lt;code&gt;pipe&lt;/code&gt;: the default method to calling an algorithm (recommended)
+- &lt;code&gt;pipeJson&lt;/code&gt;
+- &lt;code&gt;set_options&lt;/code&gt;: set query parameters on your request&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;algorithm&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;algo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;demo/Hello/0.1.1&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; #&amp;lt;Algorithmia::Algorithm:0x007f80ea092fc8 @client=Algorithmia::Client, @endpoint=&amp;quot;demo/Hello/0.1.1&amp;quot;, @query_options={:timeout=&amp;gt;300, :stdout=&amp;gt;false, :output=&amp;gt;&amp;quot;default&amp;quot;}&amp;gt;&lt;/span&gt;
+&lt;a name=&quot;True-3&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-4&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# Pass in a hash of options to override the default query parameters&lt;/span&gt;
+&lt;a name=&quot;True-5&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;algorithm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set_options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;timeout&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;a name=&quot;True-6&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; {:timeout=&amp;gt;500, :stdout=&amp;gt;false, :output=&amp;gt;&amp;quot;default&amp;quot;}&lt;/span&gt;
+&lt;a name=&quot;True-7&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-8&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# Use these helper methods to enable stdout or change the timeout value&lt;/span&gt;
+&lt;a name=&quot;True-9&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;algorithm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set_timeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;a name=&quot;True-10&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; 500&lt;/span&gt;
+&lt;a name=&quot;True-11&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;algorithm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;enable_stdout&lt;/span&gt;
+&lt;a name=&quot;True-12&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; true&lt;/span&gt;
+&lt;a name=&quot;True-13&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;algorithm&lt;/span&gt;
+&lt;a name=&quot;True-14&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; #&amp;lt;Algorithmia::Algorithm:0x007fa008b02de0 @client=Algorithmia::Client, @endpoint=&amp;quot;demo/hello&amp;quot;, @query_options={:timeout=&amp;gt;500, :stdout=&amp;gt;true, :output=&amp;gt;&amp;quot;default&amp;quot;}&amp;gt;&lt;/span&gt;
+&lt;a name=&quot;True-15&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-16&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# Pass the input to the algorithm&lt;/span&gt;
+&lt;a name=&quot;True-17&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;algorithm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;HAL 9000&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;a name=&quot;True-18&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; Hello HAL 9000&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;algorithm-responses&quot;&gt;Algorithm Responses&lt;/h3&gt;
+
+&lt;p&gt;When a successful response from the algorithm is returned, a new Algorithmia::Response object is created.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# Call an algorithm&lt;/span&gt;
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;algorithm_response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;algo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;algorithm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;HAL 9000&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;
+&lt;a name=&quot;True-3&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;algorithm_response&lt;/span&gt;
+&lt;a name=&quot;True-4&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; #&amp;lt;Algorithmia::Response:0x007f9fc2845850 @json={:result=&amp;gt;0.14970585904042558, :metadata=&amp;gt;{:content_type=&amp;gt;&amp;quot;json&amp;quot;, :duration=&amp;gt;0.0006857780000000001}&amp;gt;&lt;/span&gt;
+&lt;a name=&quot;True-5&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-6&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# Get the raw json returned from the API&lt;/span&gt;
+&lt;a name=&quot;True-7&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;algorithm_response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;
+&lt;a name=&quot;True-8&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; {:result=&amp;gt;0.14970585904042558, :metadata=&amp;gt;{:content_type=&amp;gt;&amp;quot;json&amp;quot;, :duration=&amp;gt;0.0006857780000000001}&lt;/span&gt;
+&lt;a name=&quot;True-9&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-10&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# Use any one of the following helper methods to understand the response&lt;/span&gt;
+&lt;a name=&quot;True-11&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;algorithm_response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;
+&lt;a name=&quot;True-12&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; 0.14970585904042558&lt;/span&gt;
+&lt;a name=&quot;True-13&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;algorithm_response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;
+&lt;a name=&quot;True-14&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; {:content_type=&amp;gt;&amp;quot;json&amp;quot;, :duration=&amp;gt;0.0006857780000000001}&lt;/span&gt;
+&lt;a name=&quot;True-15&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;algorithm_response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;duration&lt;/span&gt;
+&lt;a name=&quot;True-16&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; 0.0006857780000000001&lt;/span&gt;
+&lt;a name=&quot;True-17&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;algorithm_response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;content_type&lt;/span&gt;
+&lt;a name=&quot;True-18&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; &amp;quot;json&amp;quot;&lt;/span&gt;
+&lt;a name=&quot;True-19&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;algorithm_response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stdout&lt;/span&gt;
+&lt;a name=&quot;True-20&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; nil&lt;/span&gt;
+&lt;a name=&quot;True-21&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;algorithm_response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alerts&lt;/span&gt;
+&lt;a name=&quot;True-22&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; nil&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;the-data-api&quot;&gt;The Data API&lt;/h3&gt;
+
+&lt;p&gt;The client also allows you to work with the Algorithmia Data API. You can manage your files and directories using DataObjects. There are two types of DataObjects: &lt;code&gt;DataFile&lt;/code&gt; and &lt;code&gt;DataDirectory&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;datafiles&quot;&gt;DataFiles&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;data://test_user/test/sample_file.txt&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#&amp;lt;Algorithmia::DataFile:0x007ffbaa8747d8 @client=#&amp;lt;Algorithmia::Client:0x007ffbab0fc798 @api_key=&amp;quot;YOUR_API_KEY&amp;quot;&amp;gt;, @data_uri=&amp;quot;data://test_user/test/sample_file.txt&amp;quot;, @url=&amp;quot;/data/test_user/test/sample_file.txt&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;a name=&quot;True-3&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-4&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;put_file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/path/to/local/file/sample_file.txt&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;a name=&quot;True-5&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; true&lt;/span&gt;
+&lt;a name=&quot;True-6&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-7&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exists?&lt;/span&gt;
+&lt;a name=&quot;True-8&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; true&lt;/span&gt;
+&lt;a name=&quot;True-9&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-10&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# Write a string to the file. This will overwrite any existing content!&lt;/span&gt;
+&lt;a name=&quot;True-11&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;This is the contents of the file.&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;a name=&quot;True-12&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; true&lt;/span&gt;
+&lt;a name=&quot;True-13&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-14&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# Get the file and write to a local file&lt;/span&gt;
+&lt;a name=&quot;True-15&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_file&lt;/span&gt;
+&lt;a name=&quot;True-16&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; #&amp;lt;File:/var/folders/yl/vv6ws5196cvb61xzwrg8l3vm0000gp/T/test.txt20160328-94761-i8cqxg&amp;gt;&lt;/span&gt;
+&lt;a name=&quot;True-17&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-18&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;
+&lt;a name=&quot;True-19&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; &amp;quot;This is the contents of the file.&amp;quot;&lt;/span&gt;
+&lt;a name=&quot;True-20&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-21&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delete&lt;/span&gt;
+&lt;a name=&quot;True-22&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; true&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;datadirectories&quot;&gt;DataDirectories&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# Create a DataDirectory object&lt;/span&gt;
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;dir&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;data://test_user/test&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;a name=&quot;True-3&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; #&amp;lt;Algorithmia::DataDirectory:0x007ffbab0fc748 @client=#&amp;lt;Algorithmia::Client:0x007ffbab0fc798 @api_key=&amp;quot;YOUR_API_KEY&amp;quot;&amp;gt;, @data_uri=&amp;quot;data://test_user/test&amp;quot;, @url=&amp;quot;/data/test_user/test&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;a name=&quot;True-4&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-5&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# Create a new directory&lt;/span&gt;
+&lt;a name=&quot;True-6&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;create&lt;/span&gt;
+&lt;a name=&quot;True-7&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; true&lt;/span&gt;
+&lt;a name=&quot;True-8&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-9&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exists?&lt;/span&gt;
+&lt;a name=&quot;True-10&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; true&lt;/span&gt;
+&lt;a name=&quot;True-11&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-12&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# Get a new DataDirectory object for the parent directory&lt;/span&gt;
+&lt;a name=&quot;True-13&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent&lt;/span&gt;
+&lt;a name=&quot;True-14&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; #&amp;lt;Algorithmia::DataDirectory:0x007ffba924e148 @client=#&amp;lt;Algorithmia::Client:0x007ffbab0fc798 @api_key=&amp;quot;YOUR_API_KEY&amp;quot;&amp;gt;, @data_uri=&amp;quot;data://test_user&amp;quot;, @url=&amp;quot;/data/test_user&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;a name=&quot;True-15&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-16&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# Delete the directory&lt;/span&gt;
+&lt;a name=&quot;True-17&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delete&lt;/span&gt;
+&lt;a name=&quot;True-18&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; true&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;working-with-directories&quot;&gt;Working with directories:&lt;/h5&gt;
+
+&lt;p&gt;You can iterate over all contents in a directory, only the sub-directories, or the files within the directory by using of the the &lt;code&gt;each&lt;/code&gt; methods provided. If no block is given to the method, an enumerator will be returned:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# Return an enumerator for all directory contents, each sub-directory, or each file in the directory&lt;/span&gt;
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each&lt;/span&gt;
+&lt;a name=&quot;True-3&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each_directory&lt;/span&gt;
+&lt;a name=&quot;True-4&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each_file&lt;/span&gt;
+&lt;a name=&quot;True-5&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;#  =&amp;gt; #&amp;lt;Enumerator: #&amp;lt;Algorithmia::DataDirectory:0x007ffba89bbcd8 @client=#&amp;lt;Algorithmia::Client:0x007ffbab0fc798 @api_key=&amp;quot;YOUR_API_KEY&amp;quot;&amp;gt;, @data_uri=&amp;quot;data://test_user/test_two&amp;quot;, @url=&amp;quot;/data/test_user/test_two&amp;quot;&amp;gt;:each&amp;gt;&lt;/span&gt;
+&lt;a name=&quot;True-6&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-7&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;# Iterate all directory contents, each sub-directory, or each file in the directory&lt;/span&gt;
+&lt;a name=&quot;True-8&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;block&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;a name=&quot;True-9&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each_directory&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;block&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;a name=&quot;True-10&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each_file&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;block&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;stuck-need-help&quot;&gt;Stuck? Need help?&lt;/h2&gt;
+
+&lt;p&gt;Check out our guides, tutorials, and how-tos in the &lt;a href=&quot;http://developers.algorithmia.com&quot;&gt;Algorithmia Developer Center&lt;/a&gt; as well as finding more specifics in our &lt;a href=&quot;http://docs.algorithmia.com&quot;&gt;API documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;development&quot;&gt;Development&lt;/h2&gt;
+
+&lt;p&gt;After checking out the repo, run &lt;code&gt;bin/setup&lt;/code&gt; to install dependencies. Then, run &lt;code&gt;rake spec&lt;/code&gt; to run the tests. You can also run &lt;code&gt;bin/console&lt;/code&gt; for an interactive prompt that will allow you to experiment.&lt;/p&gt;
+
+&lt;p&gt;To install this gem onto your local machine, run &lt;code&gt;bundle exec rake install&lt;/code&gt;. To release a new version, update the version number in &lt;code&gt;version.rb&lt;/code&gt;, and then run &lt;code&gt;bundle exec rake release&lt;/code&gt;, which will create a git tag for the version, push git commits and tags, and push the &lt;code&gt;.gem&lt;/code&gt; file to &lt;a href=&quot;https://rubygems.org&quot;&gt;rubygems.org&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;contributing&quot;&gt;Contributing&lt;/h2&gt;
+
+&lt;p&gt;Bug reports and pull requests are welcome on &lt;a href=&quot;https://github.com/algorithmiaio/algorithmia-ruby&quot;&gt;GitHub&lt;/a&gt;. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the &lt;a href=&quot;http://contributor-covenant.org&quot;&gt;Contributor Covenant&lt;/a&gt; code of conduct.&lt;/p&gt;
+
+&lt;h2 id=&quot;not-yet-implemented&quot;&gt;Not Yet Implemented:&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Tests! :scream:&lt;/li&gt;
+&lt;/ul&gt;
+
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>How to write a good bounty on Algorithmia</title>
+    <link href="/basics/how-to-write-a-good-bounty/"/>
+    <updated>2016-04-01T01:30:38+00:00</updated>
+    <id>/basics/how-to-write-a-good-bounty</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;Algorithmia provides a bounty system for algorithm development, where application developers can connect with algorithm developers. This system helps application developers solve a problem by leveraging the collective knowledge of the thousands of algorithms developers that participate on Algorithmia.&lt;/p&gt;
+
+&lt;p&gt;If you can’t the an algorithm, or combination of algorithms, on Algorithmia that solves your problem, the bounty system is a great place to start. The following guide will show you how to create a compelling bounty so you maximize chance of getting a good results quickly.&lt;/p&gt;
+
+&lt;p&gt;Your bounty is more likely to be fulfilled if algorithm developers can easily understand what you need, and why. So, think of your bounty description as a requirement doc for your solution. The more complete and thorough, the better. It’s strongly recommended to provide test cases and/or sample data.&lt;/p&gt;
+
+&lt;p&gt;For this guide, we will build the &lt;a href=&quot;https://algorithmia.com/bounties/32&quot;&gt;“Affinity Analysis for Market Basket Recommendation”&lt;/a&gt; bounty which has already been fulfilled.&lt;/p&gt;
+
+&lt;p&gt;We will follow these steps to create our bounty:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;State the Problem&lt;/li&gt;
+  &lt;li&gt;Specify the Interface&lt;/li&gt;
+  &lt;li&gt;Specify the Algorithm&lt;/li&gt;
+  &lt;li&gt;Pledging the Bounty&lt;/li&gt;
+  &lt;li&gt;Share!&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;state-the-problem&quot;&gt;1. State the Problem&lt;/h3&gt;
+&lt;p&gt;This is the main section of the bounty. Be sure to clearly describe the problem, and include any relevant links to research, papers, examples, or even links to Wikipedia. This helps ensure that algorithm developers deliver exactly what you want.&lt;/p&gt;
+
+&lt;p&gt;A good problem requirement doc will have the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;A brief paragraph explaining the intent of the algorithm, and the problem you’re trying to solve. Include references that explain the problem here.&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;Affinity analysis is an analytical technique that aims to discover relationships between activities and preferences that pertain to specific individuals. Based on recorded information, after the analysis, future behavior can be statistically predicted. For a general overview see http://en.wikipedia.org/wiki/Affinity_analysis. Specific applications include clickstream analysis and market basket analysis.&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;How the algorithm will be used, and why it solves your problem.&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;One important area of application is market basket analysis, which has widespread use in planning promotions, designs and sales strategies. Market basket analysis is necessarily somewhat open-ended, but one of the more useful angles of attack is the extraction of association rules http://en.wikipedia.org/wiki/Association_rule_learning. Ultimately we wish to be able to use the set of items purchased (or otherwise accessed) by a user and recommend other items that they have an increased probability of being interested in, however, this should probably be a separate algorithm.&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;specify-the-interface&quot;&gt;2. Specify the Interface&lt;/h3&gt;
+&lt;p&gt;It’s key to explain the type of interface you expect so that you can easily integrate this algorithm in your application quickly.&lt;/p&gt;
+
+&lt;p&gt;Most algorithms on the Algorithmia use JSON for the &lt;code&gt;Input&lt;/code&gt; and &lt;code&gt;Output&lt;/code&gt;. Clarify the file types, format, and schemas for the algorithm’s input, as well as the output.&lt;/p&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;File Type/Schema:&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;The program should take a DataAPI url to a file with one session per line. A session represents the entities that were bought/used/visited in a single recorded event. This could be the urls seen in a given browsing session or items bought in a single visit to a store. i.e: bread milk eggs / beer diapers / bread bottled_water hot_dogs lemonade.&lt;/p&gt;
+    &lt;/blockquote&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;At minimum the algorithm should return frequent itemsets, preferably with some weight denoting each itemset’s prevalence. Even better would be full association rule mining, also with weights to indicate prevalence.&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Special Interface Considerations:&lt;/strong&gt; If you have additional requirements regarding conventions or integration into your application, you should specify those in this section as well:&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;The items are not ordered and there is no customer identification. For simplicity, you may ignore multiple item purchases - two or more loaves of bread just count as one bread purchase. The items are separated by whitespace, and the only constraint on the format is that items but be uniquely identifiable by the string and the string may contain no whitespaces or quotation marks.&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Example Data:&lt;/strong&gt; If available, we recommend providing sample data so that the algorithm developer can see exactly what data they will be working with. Using the &lt;a href=&quot;http://docs.algorithmia.com/#the-data-api&quot;&gt;Algorithmia Data API&lt;/a&gt; to upload a sample data set is recommended.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Warning:&lt;/em&gt; This data will be publicly accesible, we highly recommend providing data that is either fake or has no personally identifiable information.&lt;/p&gt;
+
+&lt;h3 id=&quot;specify-the-algorithm&quot;&gt;3. Specify the Algorithm&lt;/h3&gt;
+&lt;p&gt;This section is about articulating concrete algorithm needs.&lt;/p&gt;
+
+&lt;p&gt;For instance, some application developers have a specific algorithm they want implemented. Often times, however, the application developer knows what the end result should be, but doesn’t know how to get there. This is why it’s so important to clearly define what the problem is in Section 1.&lt;/p&gt;
+
+&lt;p&gt;From our example, we don’t have a specific algorithm in mind. So, we want to provide direction and context to the algorithm developer of our expectations.&lt;/p&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;This is necessarily somewhat open-ended. Mahout includes an implementation of FP-Growth, but it requires hadoop configuration,which is an unacceptable degree of complexity for many users. http://mahout.apache.org/users/misc/parallel-frequent-pattern-mining.html&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A decent example of this is https://chimpler.wordpress.com/2013/05/02/finding-association-rules-with-mahout-frequent-pattern-mining/&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;pledging-the-bounty&quot;&gt;4. Pledging the Bounty&lt;/h3&gt;
+&lt;p&gt;Bounties that pledge a monetary value are far more likely to interest algorithm developers. You can pledge between $10 and $10,000 USD toward a bounty.&lt;/p&gt;
+
+&lt;p&gt;When you pledge a monetary bounty, we’ll charge your credit card immediately and hold the money in escrow while the bounty is live.&lt;/p&gt;
+
+&lt;p&gt;Pledging a bounty starts a 60-day countdown on your bounty. If your bounty is not fulfilled within 60-days, you will have the choice to renew your bounty pledge, or be refunded. When pledging a bounty, Algorithmia collects an additional 20% fee. Bounties may be pledged in USD, Algorithmia credits, or both.&lt;/p&gt;
+
+&lt;p&gt;Find more details in the &lt;a href=&quot;https://algorithmia.com/bounty_terms&quot;&gt;Bounty Terms and Conditions&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;share&quot;&gt;5. Share!&lt;/h3&gt;
+&lt;p&gt;Now that you have created your bounty, it’s time to let the world know. Your bounty will automatically get published to our bounties page. We highly recommend sharing your bounty to Twitter, Facebook, Reddit, HN, etc. to increase the reach of your newly created bounty, and help attract algorithm developers.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-bounty-review-process&quot;&gt;The Bounty Review Process&lt;/h3&gt;
+&lt;p&gt;As the bounty creator, you will review solutions, and choose whether to accept or reject them based on the requirements described in your bounty description.&lt;/p&gt;
+
+&lt;p&gt;When a potential solution is submitted, you have 30-days to review the algorithm, and provide feedback to the algorithm developer. If you accept the solution, your bounty will change from “Active” to “Fulfilled.”&lt;/p&gt;
+
+&lt;p&gt;If you reject a solution, we require you to explain why the proposed solution didn’t meet your requirements.&lt;/p&gt;
+
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>How to Solve a bounty in Algorithmia</title>
+    <link href="/basics/how-to-fulfill-a-bounty/"/>
+    <updated>2016-04-01T01:30:38+00:00</updated>
+    <id>/basics/how-to-fulfill-a-bounty</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;The Algorithmia bounty system is a great way for algorithm developers to challenge themselves, demonstrate their expertise, and earn money. By solving bounties, algorithm developers contribute to the success of other developers and their projects.&lt;/p&gt;
+
+&lt;p&gt;A bounty represents demand for a certain algorithm by the community. Once a bounty is solved, the algorithm becomes available in the Algorithmia Marketplace, and made available for all developers to use. For an algorithm developer, this means that you earn money not just for solving the bounty, but on all future use of that algorithm as well.&lt;/p&gt;
+
+&lt;p&gt;This guide is for algorithm developers, and covers how to find a bounty, approaches to solving it, creating the algorithm, and the bounty fulfillment process.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Table of Contents&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Finding a Bounty&lt;/li&gt;
+  &lt;li&gt;Understanding the problem&lt;/li&gt;
+  &lt;li&gt;Creating a new algorithm&lt;/li&gt;
+  &lt;li&gt;A Checklist for Success&lt;/li&gt;
+  &lt;li&gt;Fulfilling the Bounty&lt;/li&gt;
+  &lt;li&gt;Review process&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;finding-a-bounty&quot;&gt;1. Finding a Bounty&lt;/h3&gt;
+&lt;p&gt;The first step in completing a bounty, is to find a bounty to complete. Our list of current bounties can be found on the &lt;a href=&quot;https://algorithmia.com/bounties&quot;&gt;Algorithmia Bounties&lt;/a&gt; page.&lt;/p&gt;
+
+&lt;p&gt;Every bounty includes some important information you’ll want to pay attention to, such as:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Who created the bounty&lt;/li&gt;
+  &lt;li&gt;If the bounty is &lt;code&gt;Active&lt;/code&gt; or &lt;code&gt;Fulfilled&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Days until the bounty expires (All bounties are active for 60 days)&lt;/li&gt;
+  &lt;li&gt;The bounty amount in USD (this is what you’ll earn for solving the bounty)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;understanding-the-problem&quot;&gt;2. Understanding the Problem&lt;/h3&gt;
+&lt;p&gt;It’s very imporant to understand the problem before attempting to fulfill a bounty. Be sure to read the bounty description carefully, and request clarification on anything using the discussion board available at the bottom of the bounty’s page. The bounty creator will be notified by email.&lt;/p&gt;
+
+&lt;p&gt;A few things you’ll want to have a good grasp on before proceeding:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What problem does is this bounty trying to solve?&lt;/li&gt;
+  &lt;li&gt;Do you need sample data to solve this bounty?&lt;/li&gt;
+  &lt;li&gt;Did the bounty creator clearly specific the input and output they want?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;creating-a-new-algorithm&quot;&gt;3. Creating a New Algorithm&lt;/h3&gt;
+&lt;p&gt;We’ve created this guided to &lt;a href=&quot;http://developers.algorithmia.com/basics/your_first_algo/&quot;&gt;walk you through making and publishing your first algorithm&lt;/a&gt; on Algorithmia. This guide covers how to produce the classic “Hello World” algorithm in Python.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-checklist-for-success&quot;&gt;4. A Checklist for Success&lt;/h3&gt;
+&lt;p&gt;A quick checklist to make sure everything is in order before submitting your algorithm for review:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Does the algorithm solve the problem stated in the bounty?&lt;/li&gt;
+  &lt;li&gt;Is there a clear description of how the algorithm works?&lt;/li&gt;
+  &lt;li&gt;Did you provide an explanation of how to use the algorithm?&lt;/li&gt;
+  &lt;li&gt;Is the sample input and output set for the algorithm?&lt;/li&gt;
+  &lt;li&gt;Has the algorithm been tested against sample data?&lt;/li&gt;
+  &lt;li&gt;Have all interface requirements required by the bounty been met?&lt;/li&gt;
+  &lt;li&gt;Is the algorithm publicly published?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If all answers are &lt;code&gt;YES&lt;/code&gt;, then you are ready to fulfill the bounty.&lt;/p&gt;
+
+&lt;h3 id=&quot;fulfilling-the-bounty&quot;&gt;5. Fulfilling the Bounty&lt;/h3&gt;
+&lt;p&gt;Once your checklist has been completed, head to the bounty page, and click &lt;code&gt;FULFILL BOUNTY&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Select the appropriate algorithm that fulfills the bounty, and then accept  the terms and conditions of the Algorithmia bounty program by hitting &lt;code&gt;SUBMIT&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;review-process&quot;&gt;6. Review process&lt;/h3&gt;
+&lt;p&gt;Once a bounty is submitted, both the bounty creator and Algorithmia will review it. The bounty creator has 30-days to accept or reject the algorithm submitted. Algorithmia may also request changes to the algorithm to ensure security and compliance.&lt;/p&gt;
+
+&lt;p&gt;When a bounty is accepted, the algorithm is made available on the platform, and the algorithm developer paid for completing the bounty. The algorithm developer can choose to be paid in USD via Paypal, or in Algorithmia platform credits. Credits can be cashed out at anytime.&lt;/p&gt;
+
+&lt;p&gt;If the bounty is rejected, the bounty creator is required to provide a detailed reason why the algorithm does not fulfill the bounty. Algorithmia will help determine if the reasons the algorithm was rejected are valid, or not.&lt;/p&gt;
+
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>All About Bounties</title>
+    <link href="/basics/all-about-bounties/"/>
+    <updated>2016-03-10T01:19:38+00:00</updated>
+    <id>/basics/all-about-bounties</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;Bounties are part of the Algorithmia Marketplace and allow users to post their algorithmic needs for particular problems they may have. Bounties are a great way to get tailored solutions written by subject matter experts and algorithm developers.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-a-bounty&quot;&gt;What is a Bounty?&lt;/h2&gt;
+
+&lt;p&gt;A bounty is a posting that advertises a problem that needs solving with an algorithm. Anyone can post a bounty or provide the solution!&lt;/p&gt;
+
+&lt;h2 id=&quot;what-kind-of-problems-are-appropriate-for-bounties&quot;&gt;What kind of problems are appropriate for bounties?&lt;/h2&gt;
+
+&lt;p&gt;Bounties are great for problems that have concrete inputs and outputs. A bounty is a great opportunity to get a subject matter expert to solve a specific problem that you have but don’t know how to solve yourself. This would include problems such as defined transformations on structured data, obscure but well-defined statistical metrics on real-valued data, or problems such as extracting keywords for each document from a set of documents.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-kind-of-problems-are-not-a-good-match-for-the-bounty-system&quot;&gt;What kind of problems are not a good match for the bounty system?&lt;/h2&gt;
+
+&lt;p&gt;The bounty system is not a good fit for problems that are fuzzy in nature or not well defined. In order to get the best solution, the problem needs to be scoped to a clearly definable piece of work that can be solved by an algorithm.&lt;/p&gt;
+
+&lt;p&gt;Examples of problems that are not a good fit for the Bounty system include:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Tasks that require substantial human intervention, such as 3D animation&lt;/li&gt;
+  &lt;li&gt;Research level problems that even experts have yet to solve&lt;/li&gt;
+  &lt;li&gt;Problems that would require infrastructure to complete, e.g., “a mobile app that does X”.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The best bounties are things you don’t quite know how to solve, but you are reasonably confident that a subject expert probably knows.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-write-a-good-bounty&quot;&gt;How to Write a Good Bounty&lt;/h2&gt;
+
+&lt;p&gt;Think of the bounty description as a design specification for the solution you need–the more complete and thorough, the better! Your bounty is more likely to be fulfilled if algorithm developers can easily understand your needs. If can also provide test cases or sample data, then algorithm developers will be better able to ensure that their submission meets your needs.&lt;/p&gt;
+
+&lt;p&gt;There are a few levels to consider when writing a bounty and depending on your purpose the importance of each will vary.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1. Specify the problem&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The problem can range from something as mundane as converting between file formats to something as abstract as a combinatorial optimization problem. Describe the problem briefly, include any relevant links to research, papers, similar examples or even Wikipedia if these resources can help clarify the problem.&lt;/p&gt;
+
+&lt;p&gt;Be sure to provide example data. To make this easier, you can put files in the Data API and make them publicly readable. For more information on how to upload your sample data through the web browser, follow &lt;a href=&quot;/faqs/how-do-i-get-my-data-into-algorithmia/&quot;&gt;this step-by-step guide&lt;/a&gt;. If you don’t have example data available, please provide a very clear examples of what you expect the data to be and how it will look as input.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2. Specify the interface&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In order to make sure that the algorithm will fulfill your needs, be sure to specify what the input and output formats will be. Usually this will be something standard, like a list of strings, an array of integers, or an image file.&lt;/p&gt;
+
+&lt;p&gt;In other cases, a custom class will be easier. If you suspect that you need a custom class, check out our &lt;a href=&quot;https://algorithmia.com/docs/algorithm/java/&quot;&gt;Java documentation&lt;/a&gt; and be sure to provide a definition of the class int he bounty.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3. Specify the Algorithm&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;If you want a particular algorithm used to fulfill your bounty, be sure to specify this in the description. More often than not, you might not know which algorithm you want or it might not matter for the final solution.&lt;/p&gt;
+
+&lt;p&gt;If your bounty is a particularly difficult problem, your odds of getting a successful solution will rise if you provide ideas of which algorithms you think the solution might include as well as links to resources that might help an algorithm developer.&lt;/p&gt;
+
+&lt;h2 id=&quot;pledging-to-a-bounty&quot;&gt;Pledging to a Bounty&lt;/h2&gt;
+
+&lt;p&gt;In order to incentivize algorithm developers to develop an algorithm that fulfills your bounty, you can pledge between $10 and $10,000 USD to the solution. Bounties offered with a monetary value are far more likely to interest algorithm developers.&lt;/p&gt;
+
+&lt;p&gt;Pledging a bounty will start a 60-day countdown on your bounties page, and if your bounty is not fulfilled within those 60 days you will have the choice of either receiving a refund or renewing your bounty pledge. Algorithmia collects a 20% fee when you pledge a bounty. Bounties may be pledged in USD, Algorithmia credits, or both.&lt;/p&gt;
+
+&lt;p class=&quot;notice-info&quot;&gt;When you pledge a monetary bounty, you will we see a charge for the amount pledged. We hold the money in escrow while the bounty is live. If no solution is found, you have the option to receive a full refund after 60 days or extend the bounty for more time.&lt;/p&gt;
+
+&lt;p&gt;Find more details in the &lt;a href=&quot;https://algorithmia.com/bounty_terms&quot;&gt;Bounty Terms and Conditions&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-bounty-review-process&quot;&gt;The Bounty Review Process&lt;/h2&gt;
+
+&lt;p&gt;As the bounty author, you will review submitted solutions and accept or reject the proposed solutions depending on whether or not they addressed the requirements described in the bounty posting. When an algorithm is submitted as a solution, you will have 30 days to review, give feedback, and accept or reject the algorithm. For rejected solutions, you will have to explain why the proposed solution doesn’t meet the requirements.&lt;/p&gt;
+
+&lt;p&gt;When you accept an algorithm as the solution to your bounty posting, the bounty page will change from “Active” to “Fulfilled” and the algorithm will be displayed at the bottom of your bounty page.&lt;/p&gt;
+
+&lt;h2 id=&quot;fulfilling-a-bounty&quot;&gt;Fulfilling a Bounty&lt;/h2&gt;
+
+&lt;p&gt;If you are an algorithm developer and see an interesting bounty that you want to solve, you can submit the solution to fulfill the bounty.&lt;/p&gt;
+
+&lt;p&gt;To fulfill a bounty, make sure you have published the algorithm publicly. The algorithm can be either open or closed source. Next, navigate to the bounty page and click the “Fulfill Bounty” button. At this point, you will be shown a dialog box with the Algorithmia Bounty Terms &amp;amp; Agreement. After you read the agreement, select your algorithm from the drop-down menu at the bottom and click the “I agree to terms and submit algorithm for review” button. The bounty poster will have 30 days to review the algorithm, give you feedback, and ultimately pay the bounty out if the algorithm is accepted.&lt;/p&gt;
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>Who owns the intellectual property rights of uploaded source code?</title>
+    <link href="/faqs/who-owns-the-intellectual-property-rights/"/>
+    <updated>2016-03-02T15:00:38+00:00</updated>
+    <id>/faqs/who-owns-the-intellectual-property-rights</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;The author retains the intellectual property rights of their algorithm. Algorithmia never takes any ownership of your code, documents, or data. These are always owned by the original author and are free to be commercialized through channels other than Algorithmia.&lt;/p&gt;
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>Who can contribute to the Algorithmia Marketplace?</title>
+    <link href="/faqs/who-can-contribute-algorithms/"/>
+    <updated>2016-03-02T15:00:38+00:00</updated>
+    <id>/faqs/who-can-contribute-algorithms</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;Anyone can contribute algorithms to the marketplace!&lt;/p&gt;
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>What languages do you support?</title>
+    <link href="/faqs/what-languages-do-you-support/"/>
+    <updated>2016-03-02T15:00:38+00:00</updated>
+    <id>/faqs/what-languages-do-you-support</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;The Algorithmia REST API can be accessed in any language. To learn about the REST API, more information can be found in our getting started guide or you can find documentation for a specific client under the &lt;a href=&quot;/clients&quot;&gt;Clients&lt;/a&gt; section.&lt;/p&gt;
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>What languages can I write my algorithm in?</title>
+    <link href="/faqs/what-languages-can-i-write-algos-in/"/>
+    <updated>2016-03-02T15:00:38+00:00</updated>
+    <id>/faqs/what-languages-can-i-write-algos-in</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;We currently support algorithm development in Java, Scala, and Python. We are adding new languages constantly. To request a language send us email at &lt;a href=&quot;mailto:support@algorithmia.com&quot;&gt;support@algorithmia.com&lt;/a&gt;.&lt;/p&gt;
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>What is the apply() function?</title>
+    <link href="/faqs/what-is-the-apply-function/"/>
+    <updated>2016-03-02T15:00:38+00:00</updated>
+    <id>/faqs/what-is-the-apply-function</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;The &lt;code&gt;apply()&lt;/code&gt; function defines the input point of the algorithm. We use the &lt;code&gt;apply()&lt;/code&gt; function in order to make different algorithms standardized. This makes them easily chained and helps authors think about designing their algorithms in a way that makes them easy to leverage and predictable for end users.&lt;/p&gt;
+
+&lt;p&gt;Every algorithm must implement the &lt;code&gt;apply()&lt;/code&gt; function. When you author a new algorithm, you’ll find that the in browser editor comes pre-populated with the &lt;code&gt;apply()&lt;/code&gt; function, as well as some comments to help guide you as you develop.&lt;/p&gt;
+
+&lt;p&gt;There are some differences between the way the function can be implemented in Java and Python while you are developing your algorithm.&lt;/p&gt;
+
+&lt;h3 id=&quot;java--scala&quot;&gt;Java &amp;amp; Scala:&lt;/h3&gt;
+
+&lt;p&gt;When you start developing an algorithm in either Java or Scala, you will find the following pre-populated in your algorithm editor:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;cm&quot;&gt;/**&lt;/span&gt;
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt;&lt;span class=&quot;cm&quot;&gt; * This class defines your algorithm, and its input/output.&lt;/span&gt;
+&lt;a name=&quot;True-3&quot;&gt;&lt;/a&gt;&lt;span class=&quot;cm&quot;&gt; * Algorithms must define at least one apply(...) method.&lt;/span&gt;
+&lt;a name=&quot;True-4&quot;&gt;&lt;/a&gt;&lt;span class=&quot;cm&quot;&gt; *&lt;/span&gt;
+&lt;a name=&quot;True-5&quot;&gt;&lt;/a&gt;&lt;span class=&quot;cm&quot;&gt; * Examples:&lt;/span&gt;
+&lt;a name=&quot;True-6&quot;&gt;&lt;/a&gt;&lt;span class=&quot;cm&quot;&gt; *   public int apply(int[][] array) {...}&lt;/span&gt;
+&lt;a name=&quot;True-7&quot;&gt;&lt;/a&gt;&lt;span class=&quot;cm&quot;&gt; *   public String apply(Map&amp;lt;String,String&amp;gt; object) {...}&lt;/span&gt;
+&lt;a name=&quot;True-8&quot;&gt;&lt;/a&gt;&lt;span class=&quot;cm&quot;&gt; *   public List&amp;lt;Double&amp;gt; apply(double a, double b, double c) {...}&lt;/span&gt;
+&lt;a name=&quot;True-9&quot;&gt;&lt;/a&gt;&lt;span class=&quot;cm&quot;&gt; */&lt;/span&gt;
+&lt;a name=&quot;True-10&quot;&gt;&lt;/a&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;a name=&quot;True-11&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;c1&quot;&gt;// The input and output of apply() automatically turns into JSON&lt;/span&gt;
+&lt;a name=&quot;True-12&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;a name=&quot;True-13&quot;&gt;&lt;/a&gt;        &lt;span class=&quot;c1&quot;&gt;// Your algorithm code goes here&lt;/span&gt;
+&lt;a name=&quot;True-14&quot;&gt;&lt;/a&gt;        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Hello &amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;a name=&quot;True-15&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;a name=&quot;True-16&quot;&gt;&lt;/a&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Java supports multiple overloaded apply methods as well as supports multiple input arguments. In order to map the input into Java objects, we use GSON to try to parse the JSON into the expected input type.&lt;/p&gt;
+
+&lt;p&gt;In the case of overloaded apply methods, we iterate over each apply method one by one to see if the JSON matches the expected input. If it can be de-serialized into the input for a given apply method, we then execute that apply method.&lt;/p&gt;
+
+&lt;p class=&quot;notice-danger&quot;&gt;Caution! This &lt;em&gt;can&lt;/em&gt; lead to ambiguity when the JSON matches multiple apply methods, for example, a number which can be coerced to match an apply method that takes a string.&lt;/p&gt;
+
+&lt;p&gt;Java supports multiple input arguments, so that when running an algorithm with a JSON list input, the algorithm will then split the input into respective arguments. With the example JSON input of &lt;code&gt;[&quot;foo&quot;, &quot;bar&quot;]&lt;/code&gt;, the input would be mapped into first and second arguments to an apply method with a signature of &lt;code&gt;apply(String a, String b)&lt;/code&gt;, such that &lt;code&gt;a = &quot;foo&quot;&lt;/code&gt; and &lt;code&gt;b = &quot;bar&quot;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;python&quot;&gt;Python&lt;/h3&gt;
+
+&lt;p&gt;When you start writing a new algorithm in Python, you’ll find the following in your editor:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c&quot;&gt;# This module defines your algorithm, and its input/output.&lt;/span&gt;
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c&quot;&gt;# You must define an apply function that takes exactly one input.&lt;/span&gt;
+&lt;a name=&quot;True-3&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c&quot;&gt;# The input and output of apply() automatically turns into JSON.&lt;/span&gt;
+&lt;a name=&quot;True-4&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+&lt;a name=&quot;True-5&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c&quot;&gt;# Examples:&lt;/span&gt;
+&lt;a name=&quot;True-6&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c&quot;&gt;#   def apply(array):&lt;/span&gt;
+&lt;a name=&quot;True-7&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c&quot;&gt;#   def apply(str):&lt;/span&gt;
+&lt;a name=&quot;True-8&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c&quot;&gt;#   def apply(x):&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Because Python is not a typed language, we are more limited in the parsing we can do. As a result, the input for a Python algorithm is &lt;em&gt;always&lt;/em&gt; a single argument. This single input represents the JSON exactly as it comes out of the &lt;code&gt;json.loads()&lt;/code&gt; method; as such JSON lists become Python lists, JSON objects become Python dictionaries, and so on.&lt;/p&gt;
+
+&lt;p class=&quot;notice-warning&quot;&gt;Overloaded apply functions are not allowed in Python.&lt;/p&gt;
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>I would like to take an algorithm from Algorithmia offline for my application, what can I do?</title>
+    <link href="/faqs/i-want-to-take-an-algorithm-offline/"/>
+    <updated>2016-03-02T15:00:38+00:00</updated>
+    <id>/faqs/i-want-to-take-an-algorithm-offline</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;&lt;a href=&quot;https://algorithmia.com/contact&quot;&gt;Contact us&lt;/a&gt; and we will put you in contact with the original algorithm developer.&lt;/p&gt;
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>I want to offer a reward for the bounty I posted, how do I pledge it?</title>
+    <link href="/faqs/i-want-to-offer-a-bounty-reward/"/>
+    <updated>2016-03-02T15:00:38+00:00</updated>
+    <id>/faqs/i-want-to-offer-a-bounty-reward</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;To create a bounty for an algorithm, simply click the ‘Pledge’ button to fund it. Be sure to check out &lt;a href=&quot;/basics/all-about-bounties/&quot;&gt;Bounties&lt;/a&gt; page for tips on how to write an effective bounty.&lt;/p&gt;
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>I want my algorithm to be open source, can my algorithm be free of royalty charges?</title>
+    <link href="/faqs/i-want-my-algorithm-to-be-open-source/"/>
+    <updated>2016-03-02T15:00:38+00:00</updated>
+    <id>/faqs/i-want-my-algorithm-to-be-open-source</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;Yes! You can make your work completely open source and free while allowing developers across the world access to your algorithm. As an incentive to promote community contributions, open source algorithms on the Algorithmia Platform will earn 1% of the usage cost (0.01cr/sec of execution time).&lt;/p&gt;
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>I found a bug in an algorithm or it&#39;s not producing the expected results, what can I do?</title>
+    <link href="/faqs/i-found-a-bug-what-can-i-do/"/>
+    <updated>2016-03-02T15:00:38+00:00</updated>
+    <id>/faqs/i-found-a-bug-what-can-i-do</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;The quickest way to give feedback on a particular algorithm is by leaving a comment on the algorithm’s page so that the author will be immediately notified. You can also &lt;a href=&quot;https://algorithmia.com/contact&quot;&gt;contact us&lt;/a&gt;.&lt;/p&gt;
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>I am part of an educational institution or doing research. Is there a special program for me?</title>
+    <link href="/faqs/i-am-part-of-an-educational-program/"/>
+    <updated>2016-03-02T15:00:38+00:00</updated>
+    <id>/faqs/i-am-part-of-an-educational-program</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;Yes! Please &lt;a href=&quot;https://algorithmia.com/contact&quot;&gt;contact us&lt;/a&gt;. We would love to learn about your project and see if we can donate free credits.&lt;/p&gt;
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>How much does using Algorithmia cost?</title>
+    <link href="/faqs/how-much-does-using-algorithmia-cost/"/>
+    <updated>2016-03-02T15:00:38+00:00</updated>
+    <id>/faqs/how-much-does-using-algorithmia-cost</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;Every account comes with 10,000 free credits and more credits can be earned by contributing algorithms to the platform. Beyond the free tier, Algorithmia credits must be purchased. Find more information in the &lt;a href=&quot;https://algorithmia.com/pricing&quot;&gt;pricing&lt;/a&gt; section.&lt;/p&gt;
+
+&lt;p&gt;The cost of running an algorithm has two components: the algorithm price set by the developer or developers of the algorithm(s) used as well as the time it takes to run the job.&lt;/p&gt;
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>I am an algorithm developer, how do I make money?</title>
+    <link href="/faqs/how-do-i-make-money/"/>
+    <updated>2016-03-02T15:00:38+00:00</updated>
+    <id>/faqs/how-do-i-make-money</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;When adding your algorithm to the marketplace, you can determine the unit of charge in Algorithmia credits. Each time your algorithm is called through the API, we meter it and charge the caller’s credit account. When you’re ready to cash out on the credits you’ve earned as an algorithm developer, we use PayPal to securely deliver your earnings.&lt;/p&gt;
+
+&lt;p&gt;Although you are able to change the royalty fee when releasing new versions, please note that algorithms which are made available for free are not allowed to charge later on minor version changes. This ensures that users of the algorithm have predictable access to a particular version. Compute time will still have a cost for users accessing your algorithm even if it is open source and royalty free.&lt;/p&gt;
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>How do I get my data into Algorithmia? Can I upload data for processing?</title>
+    <link href="/faqs/how-do-i-get-my-data-into-algorithmia/"/>
+    <updated>2016-03-02T15:00:38+00:00</updated>
+    <id>/faqs/how-do-i-get-my-data-into-algorithmia</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;For simple cases, you can feed the data into an algorithm at request time. To upload data, you can use our Data API. The Data API is great for applications with larger data requirements or to batch process raw datasets.&lt;/p&gt;
+
+&lt;p&gt;You can also upload data to your data collection by hand. Uploading through the web browser is a quick way to get a file uploaded and accessible.&lt;/p&gt;
+
+&lt;h3 id=&quot;uploading-a-file-through-the-web-browser&quot;&gt;Uploading a file through the web browser&lt;/h3&gt;
+
+&lt;p&gt;To upload a file through the web browser, first navigate to your data collections by clicking on your profile drop down:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/faqs/uploading_data/nav_bar_dropdown.png&quot; alt=&quot;access data&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After you click on “Manage Data”, you’ll be brought to your data collections. If you already have collections or data created by algorithm calls, you’ll see those on the left hand panels. Since we are uploading a new file, first we’ll create a new collection by clicking the “Add Collection” button:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/faqs/uploading_data/click_add_collection.png&quot; alt=&quot;new collection&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Next, choose a name for your collection. The name should be alphanumeric and can’t contain spaces. Be sure to give it a descriptive name!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/faqs/uploading_data/name_collection.png&quot; alt=&quot;name_collection&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Next, to start adding files to your new collection, you can either drag and drop from your computer to the box labeled “Drop files here to upload” and the uploading process will begin immediately. Alternatively, you can also click on the uploading box to bring up a file navigator so that you can select files.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/faqs/uploading_data/add_file.png&quot; alt=&quot;add file&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Finally, be sure to check the permissions on your collection. You can select Private, My Algorithms, or Public.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/faqs/uploading_data/make_public.png&quot; alt=&quot;make public&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;“Private” means that only your account will have access to the collection.&lt;/li&gt;
+  &lt;li&gt;“My algorithms” means that any algorithm that you have authored will be able to access the collection. An example of this would be if you write an algorithm that uses a trained model. You can store the model file in your collection and any time a user calls your algorithm, it will be able to access that file. Users trying to access the file directly or from another algorithm would not have permissions to do so.&lt;/li&gt;
+  &lt;li&gt;“Public” means that any user has read access the files in your collections. Only you retain the ability to delete or write to your collection.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;other-data-sources&quot;&gt;Other data sources&lt;/h3&gt;
+
+&lt;p&gt;We also offer algorithms to transfer data from Amazon S3, SQL databases, and other data sources. More data sources are being added regularly but if there is a specific data source you need, &lt;a href=&quot;https://algorithmia.com/contact&quot;&gt;we’d love to hear from you&lt;/a&gt;!&lt;/p&gt;
+
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>How do I connect with Algorithmia?</title>
+    <link href="/faqs/how-do-i-connect-with-algorithmia/"/>
+    <updated>2016-03-02T15:00:38+00:00</updated>
+    <id>/faqs/how-do-i-connect-with-algorithmia</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;ul&gt;
+  &lt;li&gt;Follow us on &lt;a href=&quot;https://twitter.com/algorithmia&quot;&gt;Twitter&lt;/a&gt;!&lt;/li&gt;
+  &lt;li&gt;Check out the &lt;a href=&quot;http://blog.algorithmia.com/&quot;&gt;Algorithmia blog&lt;/a&gt; to stay up-to-date with new features and resources for using Algorithmia.&lt;/li&gt;
+  &lt;li&gt;Send us a quick message by clicking the ‘?’ in the bottom right of your browser on the Algorithmia homepage.&lt;/li&gt;
+  &lt;li&gt;Shoot us an email at &lt;a href=&quot;mailto:support@algorithmia.com&quot;&gt;support@algorithmia.com&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>How do I claim a bounty with my algorithm?</title>
+    <link href="/faqs/how-do-i-claim-a-bountry/"/>
+    <updated>2016-03-02T15:00:38+00:00</updated>
+    <id>/faqs/how-do-i-claim-a-bountry</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;To claim the bounty, first make sure that the algorithm is published under your account. Then go to the bounty page, click the “Fulfill Bounty” button and follow the steps to select your algorithm. The bounty poster will have 30 days to review your algorithm, give feedback, and accept the submission. If accepted, we will notify you and credit your account.&lt;/p&gt;
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>How do I avoid others copying my source code?</title>
+    <link href="/faqs/how-do-i-avoid-others-copying-my-code/"/>
+    <updated>2016-03-02T15:00:38+00:00</updated>
+    <id>/faqs/how-do-i-avoid-others-copying-my-code</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;Algorithmia has multiple permission modes for your algorithm, including viewable source code and private code. While we encourage making your source code viewable, “black-box” algorithms are allowed.&lt;/p&gt;
+
+&lt;p&gt;If you believe there has been a copyright violation, please report it by following the instructions under the section “Copyright Complaints” in the &lt;a href=&quot;https://algorithmia.com/terms&quot;&gt;Terms and Conditions&lt;/a&gt;.&lt;/p&gt;
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>Can I use external libraries with my algorithms?</title>
+    <link href="/faqs/can-i-use-external-libraries/"/>
+    <updated>2016-03-02T15:00:38+00:00</updated>
+    <id>/faqs/can-i-use-external-libraries</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;Of course! Dependencies are added to the algorithm through the Dependencies dialog inside the algorithm editor.&lt;/p&gt;
+
+&lt;p&gt;In the action bar at the top of the editor, you will see the gray button labeled “Dependencies” in between the Summary button and the Save button.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/faqs/dependencies.png&quot; alt=&quot;dependencies button&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;When you click the Dependencies button, you will see a pop-up dialog that allows you to list any external libraries that you want to import into your algorithm. This allows you to customize your algorithm as you see fit and ensures that every time the algorithm is called, all necessary libraries will be included.&lt;/p&gt;
+
+&lt;p&gt;Use this dialog the same way you would specific the dependencies any any other project of the same language. For example, you would format your dependencies for a Python algorithm in the same manner as you would in a &lt;code&gt;requirements.txt&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;You can explore &lt;a href=&quot;https://algorithmia.com/algorithms/kenny/LDA/edit&quot;&gt;this open source algorithm&lt;/a&gt; by opening up the Dependencies dialog to see an example of the dependencies specified in Java.&lt;/p&gt;
+
+&lt;h3 id=&quot;adding-dependencies-through-git&quot;&gt;Adding dependencies through Git&lt;/h3&gt;
+
+&lt;p&gt;If you are writing an algorithm in Python and would like to include a project by cloning over git, add it to your dependencies like you would in a &lt;code&gt;requirements.txt&lt;/code&gt; file:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;git&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;git&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;git&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myproject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MyProject&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;#egg=MyProject&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>Algorithmia is misbehaving or I know a way it could be better.</title>
+    <link href="/faqs/algorithmia-is-misbehaving/"/>
+    <updated>2016-03-02T15:00:38+00:00</updated>
+    <id>/faqs/algorithmia-is-misbehaving</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;You can log any bugs or propose a new features on &lt;a href=&quot;https://github.com/algorithmiaio/dev-center/issues&quot;&gt;GitHub&lt;/a&gt; or &lt;a href=&quot;https://algorithmia.com/contact&quot;&gt;contact us&lt;/a&gt; directly.&lt;/p&gt;
+
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>Algorithmia &amp; Scala</title>
+    <link href="/clients/scala/"/>
+    <updated>2016-02-22T15:00:38+00:00</updated>
+    <id>/clients/scala</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;If you work in Scala, you will be able to use the Algorithmia Java Client. The Java client is available on GitHub, published to Maven Central, and is automatically available to any algorithm you create on the Algorithmia platform.&lt;/p&gt;
+
+&lt;p&gt;Below, you’ll find a guide to the Algorithmia &amp;amp; Scala. 
+        You can also find the source code directly on &lt;a href=&quot;https://github.com/algorithmiaio/algorithmia-java.git&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;algorithmia-java&quot;&gt;algorithmia-java&lt;/h1&gt;
+
+&lt;p&gt;Java client for accessing Algorithmia’s algorithm marketplace and data APIs.&lt;/p&gt;
+
+&lt;p&gt;For API documentation, see the &lt;a href=&quot;https://algorithmia.com/docs/lang/java&quot;&gt;JavaDocs&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://app.shippable.com/projects/557f23a8edd7f2c052184a2d&quot;&gt;&lt;img src=&quot;https://api.shippable.com/projects/557f23a8edd7f2c052184a2d/badge?branch=master&quot; alt=&quot;Run Status&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://repo1.maven.org/maven2/com/algorithmia/algorithmia-client/&quot;&gt;&lt;img src=&quot;https://img.shields.io/maven-central/v/com.algorithmia/algorithmia-client.svg&quot; alt=&quot;Latest Release&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;getting-started&quot;&gt;Getting started&lt;/h1&gt;
+
+&lt;p&gt;The Algorithmia java client is published to Maven central and can be added as a dependency via:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.algorithmia&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;a name=&quot;True-3&quot;&gt;&lt;/a&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;algorithmia-client&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;a name=&quot;True-4&quot;&gt;&lt;/a&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;[,1.1.0)&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;a name=&quot;True-5&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Instantiate a client using your API Key:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;AlgorithmiaClient&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Algorithmia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;apiKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Notes:
+- API key may be omitted only when making calls from algorithms running on the Algorithmia cluster
+- Using version range &lt;code&gt;[,1.1.0)&lt;/code&gt; is recommended as it implies using the latest backward-compatible bugfixes.&lt;/p&gt;
+
+&lt;h1 id=&quot;calling-algorithms&quot;&gt;Calling Algorithms&lt;/h1&gt;
+
+&lt;p&gt;Algorithms are called with the &lt;code&gt;pipe&lt;/code&gt; method:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;Algorithm&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addOne&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;algo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;docs/JavaAddOne&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;AlgoResponse&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addOne&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;41&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;a name=&quot;True-3&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;as&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TypeToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;(){});&lt;/span&gt;
+&lt;a name=&quot;True-4&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;Double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;durationInSeconds&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMetadata&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;duration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You can also set options (query parameters in the API spec) on calls.  There are several approaches to do this, and they are all equivalent&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;// Helper methods for specific parameters in the API spec:&lt;/span&gt;
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;Algorithm&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addOne&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;algo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;docs/JavaAddOne&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;a name=&quot;True-3&quot;&gt;&lt;/a&gt;                         &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TimeUnit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;MINUTES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;a name=&quot;True-4&quot;&gt;&lt;/a&gt;                         &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setStdout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;a name=&quot;True-5&quot;&gt;&lt;/a&gt;                         &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setOutputType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AlgorithmOutputType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;RAW&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;a name=&quot;True-6&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-7&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;// Or, set query parameter string directly:&lt;/span&gt;
+&lt;a name=&quot;True-8&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;Algorithm&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addOne&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;algo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;docs/JavaAddOne&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;a name=&quot;True-9&quot;&gt;&lt;/a&gt;                         &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setOption&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;timeout&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;300&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;a name=&quot;True-10&quot;&gt;&lt;/a&gt;                         &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setOption&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;stdout&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;false&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;a name=&quot;True-11&quot;&gt;&lt;/a&gt;                         &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setOption&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;output&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;raw&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;a name=&quot;True-12&quot;&gt;&lt;/a&gt;                         
+&lt;a name=&quot;True-13&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;// Or, pass in a Map of options:&lt;/span&gt;
+&lt;a name=&quot;True-14&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;HashMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HashMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
+&lt;a name=&quot;True-15&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;timeout&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;300&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;a name=&quot;True-16&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;stdout&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;false&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;a name=&quot;True-17&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;output&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;raw&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;a name=&quot;True-18&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;Algorithm&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addOne&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;algo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;docs/JavaAddOne&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setOptions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;a name=&quot;True-19&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-20&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;// These are all equivalant and do not impact the way an algorithm is called:&lt;/span&gt;
+&lt;a name=&quot;True-21&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;AlgoResponse&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addOne&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;41&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Algorithms called with anything other than the default AlgorithmOutputType have special responses:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;// AlgorithmOutputType.RAW - does not contain metadata and result is always a string&lt;/span&gt;
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;Algorithm&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rawAddOne&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;algo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;docs/JavaAddOne&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setOutputType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AlgorithmOutputType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;RAW&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;a name=&quot;True-3&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;AlgoResponse&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rawAddOne&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;41&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;a name=&quot;True-4&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getRawOutput&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &amp;quot;41&amp;quot;&lt;/span&gt;
+&lt;a name=&quot;True-5&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;// Calling any other method on this response object will throw an exception&lt;/span&gt;
+&lt;a name=&quot;True-6&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-7&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;// AlgorithmOutputType.VOID - performs an asynchronous request and algorithm output is unaccessible&lt;/span&gt;
+&lt;a name=&quot;True-8&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;Algorithm&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;voidAddOne&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;algo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;docs/JavaAddOne&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setOutputType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AlgorithmOutputType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;VOID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;a name=&quot;True-9&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;AlgoResponse&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;voidAddOne&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;41&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;a name=&quot;True-10&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;AlgoAsyncResponse&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;asyncResponse&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAsyncResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;a name=&quot;True-11&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;asyncResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAsyncProtocol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &amp;quot;void&amp;quot;&lt;/span&gt;
+&lt;a name=&quot;True-12&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;asyncResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getRequestId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// &amp;quot;req-abcd-efgh&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;working-with-data&quot;&gt;Working with Data&lt;/h1&gt;
+
+&lt;p&gt;Manage your data stored within Algorithmia:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;// Create a directory &amp;quot;foo&amp;quot;&lt;/span&gt;
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;DataDirectory&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;data://.my/foo&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;a name=&quot;True-3&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;a name=&quot;True-4&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-5&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;// Create a directory with specific ACL&lt;/span&gt;
+&lt;a name=&quot;True-6&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;DataDirectory&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooLimited&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;data://.my/fooLimited&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;a name=&quot;True-7&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;fooLimited&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DataAcl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;PRIVATE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;a name=&quot;True-8&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-9&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;// Or, update the directory&amp;#39;s ACL after creation&lt;/span&gt;
+&lt;a name=&quot;True-10&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;fooLimited&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;updatePermissions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DataAcl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;PRIVATE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;a name=&quot;True-11&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-12&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;// View the directory&amp;#39;s permissions&lt;/span&gt;
+&lt;a name=&quot;True-13&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;fooLimited&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getPermissions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getReadPermissions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DataAclType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;PRIVATE&lt;/span&gt;
+&lt;a name=&quot;True-14&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-15&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;// Upload files to &amp;quot;foo&amp;quot; directory&lt;/span&gt;
+&lt;a name=&quot;True-16&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;sample.txt&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;sample text contents&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;a name=&quot;True-17&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;binary_file&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xe0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x4f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xd0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x20&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+&lt;a name=&quot;True-18&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;putFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/path/to/myfile&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+&lt;a name=&quot;True-19&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-20&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;// List files in &amp;quot;foo&amp;quot;&lt;/span&gt;
+&lt;a name=&quot;True-21&quot;&gt;&lt;/a&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DataFile&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getFileIter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;a name=&quot;True-22&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot; at URL: &amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+&lt;a name=&quot;True-23&quot;&gt;&lt;/a&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;a name=&quot;True-24&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-25&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;// Get contents of files&lt;/span&gt;
+&lt;a name=&quot;True-26&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sampleText&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;sample.txt&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;a name=&quot;True-27&quot;&gt;&lt;/a&gt;&lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;binaryContent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;binary_file&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getBytes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;a name=&quot;True-28&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;File&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tempFile&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;myfile&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;a name=&quot;True-29&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-30&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c1&quot;&gt;// Delete files and directories&lt;/span&gt;
+&lt;a name=&quot;True-31&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;sample.txt&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;delete&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;a name=&quot;True-32&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;delete&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true implies force deleting the directory and its contents&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>The CLI Client</title>
+    <link href="/clients/cli/"/>
+    <updated>2016-02-22T15:00:38+00:00</updated>
+    <id>/clients/cli</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;The Algorithmia CLI is a cross-platform tool for interfacing with algorithms and the Algorithmia Data API.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://travis-ci.org/algorithmiaio/algorithmia-cli&quot;&gt;&lt;img src=&quot;https://travis-ci.org/algorithmiaio/algorithmia-cli.svg&quot; alt=&quot;Build Status&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Algorithmia CLI is a cross-platform tool for interfacing with algorithms and the Algorithmia Data API.&lt;/p&gt;
+
+&lt;p&gt;This guide will cover:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#installing-the-algorithmia-cli&quot;&gt;Installation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#configure-authentication&quot;&gt;Authentication&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#usage&quot;&gt;Usage&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#options&quot;&gt;Command Options&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#the-algorithmia-data-api&quot;&gt;The Data API&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#using-multiple-profiles&quot;&gt;Using Multiple Profiles&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Check out the tool in use in this short demo video (click to watch on YouTube):
+&lt;a href=&quot;https://www.youtube.com/watch?v=mAJagjRl_qk&quot;&gt;&lt;img src=&quot;https://j.gifs.com/v1egak.gif&quot; alt=&quot;Example CLI Usage&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;installing-the-algorithmia-cli&quot;&gt;Installing the Algorithmia CLI&lt;/h2&gt;
+
+&lt;p&gt;The latest releases &amp;amp; changelog can be found &lt;a href=&quot;https://github.com/algorithmiaio/algorithmia-cli/releases/latest&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Debian/Ubuntu&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;For our Debian/Ubuntu users, a &lt;code&gt;.deb&lt;/code&gt; package is available for installation with &lt;code&gt;dpkg&lt;/code&gt;. Simply run the following:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;curl -L https://github.com/algorithmiaio/algorithmia-cli/releases/download/v1.0.0-beta.2/algorithmia_1.0.0-beta.2_amd64.deb &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sudo dpkg -i&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Arch&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Arch packages available on the AUR as &lt;a href=&quot;https://aur4.archlinux.org/packages/algorithmia-bin/&quot;&gt;algorithmia-bin&lt;/a&gt; and &lt;a href=&quot;https://aur4.archlinux.org/packages/algorithmia-git/&quot;&gt;algorithmia-git&lt;/a&gt;. Use your favorite AUR helper (e.g. &lt;code&gt;aura&lt;/code&gt;):&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;aura -A algorithmia-bin&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;OSX&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Simply download and extract the OSX tarball:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;curl -L https://github.com/algorithmiaio/algorithmia-cli/releases/download/v1.0.0-beta.2/algorithmia_osx.tar.gz &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; tar -xz&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We recommend putting it within your &lt;code&gt;PATH&lt;/code&gt; with the following command:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo mv algo /usr/local/bin/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Windows (64-bit)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Install &lt;a href=&quot;https://slproweb.com/products/Win32OpenSSL.html&quot;&gt;OpenSSL for Windows&lt;/a&gt;.&lt;br /&gt;
+Download and extract the &lt;a href=&quot;https://github.com/algorithmiaio/algorithmia-cli/releases/download/v1.0.0-beta.2/algorithmia_win64.zip&quot;&gt;latest Windows zip file&lt;/a&gt;. Again, we recommend putting it within your &lt;code&gt;PATH&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;configure-authentication&quot;&gt;Configure Authentication&lt;/h2&gt;
+
+&lt;p&gt;In order to make calls with the CLI, you’ll need to configure the authentication with an API key. If you don’t already have an API key, get started by signing up for an account at &lt;a href=&quot;https://algorithmia.com&quot;&gt;Algorithmia.com&lt;/a&gt;. Once you’ve completed the sign up process, copy the API key from your account dashboard.&lt;/p&gt;
+
+&lt;p&gt;Begin the configuration process by running the command &lt;code&gt;algo auth&lt;/code&gt;. 
+You will see an interactive prompt to guide you through setting up a default profile:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo auth
+Configuring authentication &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;default&amp;#39;&lt;/span&gt; profile
+Enter API Key &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;prefixed with &lt;span class=&quot;s1&quot;&gt;&amp;#39;sim&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:
+Profile is ready to use. Test with &lt;span class=&quot;s1&quot;&gt;&amp;#39;algo ls&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;See &lt;a href=&quot;#using-multiple-profiles&quot;&gt;Using multiple profiles&lt;/a&gt; for instructions on how to set authenticate and use more than one profile with the Algorithmia CLI tool.&lt;/p&gt;
+
+&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
+
+&lt;p&gt;To call an algorithm from the CLI, use the command syntax: &lt;code&gt;algo run&lt;/code&gt;, followed by the algorithm’s username and algorithm name, the data options, and finally the input. Here is a basic example calling the &lt;a href=&quot;https://algorithmia.com/algorithms/kenny/Factor&quot;&gt;Factor algorithm&lt;/a&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo run kenny/factor -d 19635
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;3,5,7,11,17&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Add the option &lt;code&gt;--response-body&lt;/code&gt; to see the full JSON response:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo run kenny/factor -d &lt;span class=&quot;m&quot;&gt;19635&lt;/span&gt; --response-body
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;result&amp;quot;&lt;/span&gt;:&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;3,5,7,11,17&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;,
+  &lt;span class=&quot;s2&quot;&gt;&amp;quot;metadata&amp;quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;content_type&amp;quot;&lt;/span&gt;:&lt;span class=&quot;s2&quot;&gt;&amp;quot;json&amp;quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&amp;quot;duration&amp;quot;&lt;/span&gt;:0.001427314&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Run &lt;code&gt;algo run --help&lt;/code&gt; to see more command options or view the following &lt;a href=&quot;#options&quot;&gt;Options&lt;/a&gt; section.&lt;/p&gt;
+
+&lt;h3 id=&quot;options&quot;&gt;Options&lt;/h3&gt;
+
+&lt;h4 id=&quot;input-data-options&quot;&gt;Input Data Options&lt;/h4&gt;
+&lt;p&gt;There are several options for specifying the type and source of input data. The Algorithmia CLI supports JSON, text, and binary data, as well as an option to auto-detect the data type.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Option Flag&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-d, –data &lt;data&gt;&lt;/data&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;If the data parses as JSON, assume JSON, else if the data is valid UTF-8, assume text, else assume binary&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-D, –data-file &lt;file&gt;&lt;/file&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Same as –data, but the input data is read from a file&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-j, –json &lt;data&gt;&lt;/data&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Algorithm input data as JSON (application/json)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-J, –json-file &lt;file&gt;&lt;/file&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Same as –json, but the input data is read from a file&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-t, –text &lt;data&gt;&lt;/data&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Algorithm input data as text (text/plain)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-T, –text-file &lt;file&gt;&lt;/file&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Same as –text, but the input data is read from a file&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-b, –binary &lt;data&gt;&lt;/data&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Algorithm input data as binary (application/octet-stream)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-B, –binary-file &lt;file&gt;&lt;/file&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Same as –data, but the input data is read from a file&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&quot;output-options&quot;&gt;Output Options&lt;/h4&gt;
+
+&lt;p&gt;The algorithm result is printed to STDOUT by defauft. Additional notices may be printed to STDERR. If you’d like to output the result to a file, use the output option flag followed by a filename:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo run kenny/factor -d &lt;span class=&quot;m&quot;&gt;17&lt;/span&gt; --output results.txt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Option Flag&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;–debug&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Print algorithm’s STDOUT (author-only)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;–response-body&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Print HTTP response body (replaces result)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;–response&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Print full HTTP response including headers (replaces result)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-s, –silence&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Suppress any output not explicitly requested (except result)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-m, –meta&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Print human-readable selection of metadata (e.g. duration)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-o, –output &lt;file&gt;&lt;/file&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Print result to a file, implies –meta&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&quot;other-options&quot;&gt;Other Options&lt;/h4&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Option Flag&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;–timeout &lt;seconds&gt;&lt;/seconds&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Sets algorithm timeout&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&quot;examples&quot;&gt;Examples:&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo kenny/factor/0.1.0 -t &lt;span class=&quot;s1&quot;&gt;&amp;#39;79&amp;#39;&lt;/span&gt;                   Run algorithm with specified version &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; data input as text 
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo anowell/Dijkstra -J routes.json              Run algorithm with file input
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo anowell/Dijkstra -J - &amp;lt; routes.json          Same as above but using STDIN
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo opencv/SmartThumbnail -B in.png -o out.png   Runs algorithm with binary data input
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo run kenny/factor -d &lt;span class=&quot;m&quot;&gt;17&lt;/span&gt; --timeout &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;           Runs algorithm with a timeout of &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; seconds&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;the-algorithmia-data-api&quot;&gt;The Algorithmia Data API&lt;/h2&gt;
+
+&lt;p&gt;Use the Algorithmia CLI to interact with the Algorithmia Data API. You can use the CLI to create and manage your data directories.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Data commands include:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Command&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;ls&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;List contents of a data directory&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;mkdir&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Create a data directory&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;rmdir&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Delete a data directory&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;rm&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Remove a file from a data directory&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;cp&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Copy file(s) to or from a data directory&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;cat&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Concatenate &amp;amp; print file(s) in a directory&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;examples-of-the-algorithmia-data-api-usage&quot;&gt;Examples of the Algorithmia Data API usage:&lt;/h3&gt;
+
+&lt;p&gt;Create a data directory:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo mkdir .my/cuteAnimals
+Created directory data://.my/cuteAnimals&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Copy a file from your local directory to the new data directory:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo cp chubby_kittens.jpg data://.my/cuteAnimals
+Uploaded data://.my/cuteAnimals/chubby_kittens.jpg&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;using-multiple-profiles&quot;&gt;Using multiple profiles&lt;/h2&gt;
+
+&lt;h3 id=&quot;add-additional-profiles&quot;&gt;Add additional profiles&lt;/h3&gt;
+
+&lt;p&gt;With the Algorithmia CLI, you can configure multiple custom profiles to use. To add a new profile, you will run through the same interactive prompt–simply add a profile name to the command to add a new profile.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo auth second_user
+Configuring authentication &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;second_user&amp;#39;&lt;/span&gt; profile
+Enter API Key &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;prefixed with &lt;span class=&quot;s1&quot;&gt;&amp;#39;sim&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:
+Profile is ready to use. Test with &lt;span class=&quot;s1&quot;&gt;&amp;#39;algo ls&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;When you re-run the &lt;code&gt;algo ls&lt;/code&gt; command, you should now see both profiles. For more information, see the auth command help with &lt;code&gt;algo auth --help&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;using-profiles-in-commands&quot;&gt;Using profiles in commands&lt;/h3&gt;
+
+&lt;p&gt;When running commands, the Algorithmia CLI will use the default profile unless otherwise specified with the &lt;code&gt;--profile &amp;lt;profile&amp;gt;&lt;/code&gt; option. See the following example:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo run kenny/factor -d &lt;span class=&quot;m&quot;&gt;17&lt;/span&gt; --profile second_user
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;17&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Below, you’ll find a guide to the The CLI Client. 
+        You can also find the source code directly on &lt;a href=&quot;https://github.com/algorithmiaio/algorithmia-cli.git&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;algorithmia-cli-tools&quot;&gt;Algorithmia CLI Tools&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://travis-ci.org/algorithmiaio/algorithmia-cli&quot;&gt;&lt;img src=&quot;https://travis-ci.org/algorithmiaio/algorithmia-cli.svg&quot; alt=&quot;Build Status&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Algorithmia CLI is a cross-platform tool for interfacing with algorithms and the Algorithmia Data API.&lt;/p&gt;
+
+&lt;p&gt;This guide will cover:
+* &lt;a href=&quot;#installing-the-algorithmia-cli&quot;&gt;Installation&lt;/a&gt;
+* &lt;a href=&quot;#configure-authentication&quot;&gt;Authentication&lt;/a&gt;
+* &lt;a href=&quot;#usage&quot;&gt;Usage&lt;/a&gt;
+* &lt;a href=&quot;#options&quot;&gt;Command Options&lt;/a&gt;
+* &lt;a href=&quot;#the-algorithmia-data-api&quot;&gt;The Data API&lt;/a&gt;
+* &lt;a href=&quot;#using-multiple-profiles&quot;&gt;Using Multiple Profiles&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Check out the tool in use in this short demo video (click to watch on YouTube):
+&lt;a href=&quot;https://www.youtube.com/watch?v=mAJagjRl_qk&quot;&gt;&lt;img src=&quot;https://j.gifs.com/v1egak.gif&quot; alt=&quot;Example CLI Usage&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;installing-the-algorithmia-cli-1&quot;&gt;Installing the Algorithmia CLI&lt;/h2&gt;
+
+&lt;p&gt;The latest releases &amp;amp; changelog can be found &lt;a href=&quot;https://github.com/algorithmiaio/algorithmia-cli/releases/latest&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Debian/Ubuntu&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;For our Debian/Ubuntu users, a &lt;code&gt;.deb&lt;/code&gt; package is available for installation with &lt;code&gt;dpkg&lt;/code&gt;. Simply run the following:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;curl -L https://github.com/algorithmiaio/algorithmia-cli/releases/download/v1.0.0-beta.2/algorithmia_1.0.0-beta.2_amd64.deb &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sudo dpkg -i&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Arch&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Arch packages available on the AUR as &lt;a href=&quot;https://aur4.archlinux.org/packages/algorithmia-bin/&quot;&gt;algorithmia-bin&lt;/a&gt; and &lt;a href=&quot;https://aur4.archlinux.org/packages/algorithmia-git/&quot;&gt;algorithmia-git&lt;/a&gt;. Use your favorite AUR helper (e.g. &lt;code&gt;aura&lt;/code&gt;):&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;aura -A algorithmia-bin&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;OSX&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Simply download and extract the OSX tarball:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;curl -L https://github.com/algorithmiaio/algorithmia-cli/releases/download/v1.0.0-beta.2/algorithmia_osx.tar.gz &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; tar -xz&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We recommend putting it within your &lt;code&gt;PATH&lt;/code&gt; with the following command:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;sudo mv algo /usr/local/bin/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Windows (64-bit)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Install &lt;a href=&quot;https://slproweb.com/products/Win32OpenSSL.html&quot;&gt;OpenSSL for Windows&lt;/a&gt;.&lt;br /&gt;
+Download and extract the &lt;a href=&quot;https://github.com/algorithmiaio/algorithmia-cli/releases/download/v1.0.0-beta.2/algorithmia_win64.zip&quot;&gt;latest Windows zip file&lt;/a&gt;. Again, we recommend putting it within your &lt;code&gt;PATH&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;configure-authentication-1&quot;&gt;Configure Authentication&lt;/h2&gt;
+
+&lt;p&gt;In order to make calls with the CLI, you’ll need to configure the authentication with an API key. If you don’t already have an API key, get started by signing up for an account at &lt;a href=&quot;https://algorithmia.com&quot;&gt;Algorithmia.com&lt;/a&gt;. Once you’ve completed the sign up process, copy the API key from your account dashboard.&lt;/p&gt;
+
+&lt;p&gt;Begin the configuration process by running the command &lt;code&gt;algo auth&lt;/code&gt;. 
+You will see an interactive prompt to guide you through setting up a default profile:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo auth
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt;Configuring authentication &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;default&amp;#39;&lt;/span&gt; profile
+&lt;a name=&quot;True-3&quot;&gt;&lt;/a&gt;Enter API Key &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;prefixed with &lt;span class=&quot;s1&quot;&gt;&amp;#39;sim&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:
+&lt;a name=&quot;True-4&quot;&gt;&lt;/a&gt;Profile is ready to use. Test with &lt;span class=&quot;s1&quot;&gt;&amp;#39;algo ls&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;See &lt;a href=&quot;#using-multiple-profiles&quot;&gt;Using multiple profiles&lt;/a&gt; for instructions on how to set authenticate and use more than one profile with the Algorithmia CLI tool.&lt;/p&gt;
+
+&lt;h2 id=&quot;usage-1&quot;&gt;Usage&lt;/h2&gt;
+
+&lt;p&gt;To call an algorithm from the CLI, use the command syntax: &lt;code&gt;algo run&lt;/code&gt;, followed by the algorithm’s username and algorithm name, the data options, and finally the input. Here is a basic example calling the &lt;a href=&quot;https://algorithmia.com/algorithms/kenny/Factor&quot;&gt;Factor algorithm&lt;/a&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo run kenny/factor -d 19635
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;3,5,7,11,17&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Add the option &lt;code&gt;--response-body&lt;/code&gt; to see the full JSON response:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo run kenny/factor -d &lt;span class=&quot;m&quot;&gt;19635&lt;/span&gt; --response-body
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;result&amp;quot;&lt;/span&gt;:&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;3,5,7,11,17&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&amp;quot;metadata&amp;quot;&lt;/span&gt;:&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;content_type&amp;quot;&lt;/span&gt;:&lt;span class=&quot;s2&quot;&gt;&amp;quot;json&amp;quot;&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&amp;quot;duration&amp;quot;&lt;/span&gt;:0.001427314&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Run &lt;code&gt;algo run --help&lt;/code&gt; to see more command options or view the following &lt;a href=&quot;#options&quot;&gt;Options&lt;/a&gt; section.&lt;/p&gt;
+
+&lt;h3 id=&quot;options-1&quot;&gt;Options&lt;/h3&gt;
+
+&lt;h4 id=&quot;input-data-options-1&quot;&gt;Input Data Options&lt;/h4&gt;
+&lt;p&gt;There are several options for specifying the type and source of input data. The Algorithmia CLI supports JSON, text, and binary data, as well as an option to auto-detect the data type.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Option Flag&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-d, –data &lt;data&gt;&lt;/data&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;If the data parses as JSON, assume JSON, else if the data is valid UTF-8, assume text, else assume binary&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-D, –data-file &lt;file&gt;&lt;/file&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Same as –data, but the input data is read from a file&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-j, –json &lt;data&gt;&lt;/data&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Algorithm input data as JSON (application/json)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-J, –json-file &lt;file&gt;&lt;/file&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Same as –json, but the input data is read from a file&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-t, –text &lt;data&gt;&lt;/data&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Algorithm input data as text (text/plain)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-T, –text-file &lt;file&gt;&lt;/file&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Same as –text, but the input data is read from a file&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-b, –binary &lt;data&gt;&lt;/data&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Algorithm input data as binary (application/octet-stream)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-B, –binary-file &lt;file&gt;&lt;/file&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Same as –data, but the input data is read from a file&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&quot;output-options-1&quot;&gt;Output Options&lt;/h4&gt;
+
+&lt;p&gt;The algorithm result is printed to STDOUT by defauft. Additional notices may be printed to STDERR. If you’d like to output the result to a file, use the output option flag followed by a filename:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo run kenny/factor -d &lt;span class=&quot;m&quot;&gt;17&lt;/span&gt; --output results.txt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Option Flag&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;–debug&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Print algorithm’s STDOUT (author-only)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;–response-body&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Print HTTP response body (replaces result)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;–response&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Print full HTTP response including headers (replaces result)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-s, –silence&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Suppress any output not explicitly requested (except result)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-m, –meta&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Print human-readable selection of metadata (e.g. duration)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;-o, –output &lt;file&gt;&lt;/file&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Print result to a file, implies –meta&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&quot;other-options-1&quot;&gt;Other Options&lt;/h4&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Option Flag&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;–timeout &lt;seconds&gt;&lt;/seconds&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Sets algorithm timeout&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&quot;examples-1&quot;&gt;Examples:&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo kenny/factor/0.1.0 -t &lt;span class=&quot;s1&quot;&gt;&amp;#39;79&amp;#39;&lt;/span&gt;                   Run algorithm with specified version &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; data input as text 
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo anowell/Dijkstra -J routes.json              Run algorithm with file input
+&lt;a name=&quot;True-3&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo anowell/Dijkstra -J - &amp;lt; routes.json          Same as above but using STDIN
+&lt;a name=&quot;True-4&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo opencv/SmartThumbnail -B in.png -o out.png   Runs algorithm with binary data input
+&lt;a name=&quot;True-5&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo run kenny/factor -d &lt;span class=&quot;m&quot;&gt;17&lt;/span&gt; --timeout &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;           Runs algorithm with a timeout of &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; seconds&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;the-algorithmia-data-api-1&quot;&gt;The Algorithmia Data API&lt;/h2&gt;
+
+&lt;p&gt;Use the Algorithmia CLI to interact with the Algorithmia Data API. You can use the CLI to create and manage your data directories.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Data commands include:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Command&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;ls&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;List contents of a data directory&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;mkdir&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Create a data directory&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;rmdir&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Delete a data directory&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;rm&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Remove a file from a data directory&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;cp&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Copy file(s) to or from a data directory&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;cat&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Concatenate &amp;amp; print file(s) in a directory&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;examples-of-the-algorithmia-data-api-usage-1&quot;&gt;Examples of the Algorithmia Data API usage:&lt;/h3&gt;
+
+&lt;p&gt;Create a data directory:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo mkdir .my/cuteAnimals
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-3&quot;&gt;&lt;/a&gt;Created directory data://.my/cuteAnimals&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Copy a file from your local directory to the new data directory:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo cp chubby_kittens.jpg data://.my/cuteAnimals
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;True-3&quot;&gt;&lt;/a&gt;Uploaded data://.my/cuteAnimals/chubby_kittens.jpg&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;using-multiple-profiles-1&quot;&gt;Using multiple profiles&lt;/h2&gt;
+
+&lt;h3 id=&quot;add-additional-profiles-1&quot;&gt;Add additional profiles&lt;/h3&gt;
+
+&lt;p&gt;With the Algorithmia CLI, you can configure multiple custom profiles to use. To add a new profile, you will run through the same interactive prompt–simply add a profile name to the command to add a new profile.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo auth second_user
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt;Configuring authentication &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;second_user&amp;#39;&lt;/span&gt; profile
+&lt;a name=&quot;True-3&quot;&gt;&lt;/a&gt;Enter API Key &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;prefixed with &lt;span class=&quot;s1&quot;&gt;&amp;#39;sim&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:
+&lt;a name=&quot;True-4&quot;&gt;&lt;/a&gt;Profile is ready to use. Test with &lt;span class=&quot;s1&quot;&gt;&amp;#39;algo ls&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;When you re-run the &lt;code&gt;algo ls&lt;/code&gt; command, you should now see both profiles. For more information, see the auth command help with &lt;code&gt;algo auth --help&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;using-profiles-in-commands-1&quot;&gt;Using profiles in commands&lt;/h3&gt;
+
+&lt;p&gt;When running commands, the Algorithmia CLI will use the default profile unless otherwise specified with the &lt;code&gt;--profile &amp;lt;profile&amp;gt;&lt;/code&gt; option. See the following example:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;algo run kenny/factor -d &lt;span class=&quot;m&quot;&gt;17&lt;/span&gt; --profile second_user
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;17&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;build--test&quot;&gt;Build &amp;amp; Test&lt;/h2&gt;
+
+&lt;p&gt;This project is built and tested with cargo:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;a name=&quot;True-1&quot;&gt;&lt;/a&gt;cargo build
+&lt;a name=&quot;True-2&quot;&gt;&lt;/a&gt;cargo &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+    </content>
+  </entry>
+  
+  <entry>
+    <title>Customizing API Keys &amp; Access</title>
+    <link href="/basics/customizing-api-keys/"/>
+    <updated>2016-02-17T15:00:38+00:00</updated>
+    <id>/basics/customizing-api-keys</id>
+    <author>
+      <name>Algorithmia</name>
+      <uri>/</uri>
+      <email>mia@algorithmia.com</email>
+    </author>
+    <content type="html">
+      
+      &lt;p&gt;To call algorithms and interact with the Data API, you’ll use an API key to authenticate. But did you know you can create additional API keys and customize their access permissions? This guide will show you how.&lt;/p&gt;
+
+&lt;nav class=&quot;toc&quot;&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#your-default-api-key&quot; id=&quot;markdown-toc-your-default-api-key&quot;&gt;Your default API key&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#adding-a-new-api-key&quot; id=&quot;markdown-toc-adding-a-new-api-key&quot;&gt;Adding a new API key&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#access-options&quot; id=&quot;markdown-toc-access-options&quot;&gt;Access options&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/nav&gt;
+
+&lt;h2 id=&quot;your-default-api-key&quot;&gt;Your default API key&lt;/h2&gt;
+
+&lt;p&gt;To view your API keys, head on over to your profile on Algorithmia and click on the “Credentials” option in the horizontal menu. For more information about your profile, be sure to check out the &lt;a href=&quot;https://developers.algorithmia.com/basics/your-profile&quot;&gt;Your Profile guide&lt;/a&gt; for more information.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/api_keys/api_keys_home.png&quot; alt=&quot;API keys home&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;When you sign up for Algorithmia, your account is created with a default API key. Conveniently, it is named &lt;code&gt;default-key&lt;/code&gt;! This key will show up in the code snippets on an algorithm profile page when you are signed in, allowing you to easily make calls to the algorithm either through the web console or by copying the code directly to include in your program.&lt;/p&gt;
+
+&lt;p class=&quot;notice-info&quot;&gt;If you delete your &lt;code&gt;default-key&lt;/code&gt;, it will no longer show up in the code snippets on the algorithm profile pages. Simply create a new key and name it &lt;code&gt;default-key&lt;/code&gt; to have it appear again!&lt;/p&gt;
+
+&lt;h2 id=&quot;adding-a-new-api-key&quot;&gt;Adding a new API key&lt;/h2&gt;
+
+&lt;p&gt;Let’s walk through the process of adding an additional API key to your account. Click the purple “New simple key” button below the list of active keys. You’ll be prompted with a dialog that allows you to name your new key and set the permissions on it:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/api_keys/api_key_dialog.png&quot; alt=&quot;API keys dialog&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;access-options&quot;&gt;Access options&lt;/h2&gt;
+
+&lt;p&gt;Each API key can be customized to enable or restrict access depending on your needs. This is particularly helpful if you are running multiple applications or websites that use the Algorithmia API. Each app can use a different key so that if they are ever compromised (such as accidentally pushing a key to GitHub), you won’t have to reset the API key for each project.&lt;/p&gt;
+
+&lt;p&gt;This allows you to put security first by only enabling the access you actually need. :closed_lock_with_key:&lt;/p&gt;
+
+&lt;h3 id=&quot;named-algorithms-only&quot;&gt;Named algorithms only&lt;/h3&gt;
+
+&lt;p&gt;One way you can restrict access with an API key is to only white list the algorithms that you want that key to be able to call.&lt;/p&gt;
+
+&lt;p&gt;You can do this by adding the shorthand name for the algorithms you want the API key to access like so:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/api_keys/algo_restrictions.png&quot; alt=&quot;caller origin&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Note that we are using the alias version of the algorithm: &lt;code&gt;algo://&lt;/code&gt; is the prefix you’ll need to use before the owner name and algorithm name. Let’s say that I have a project that has its own API key that I want to restrict to only call the algorithms I specify. I’ll name my key after the project, then add the algorithms it can call. If I want to use &lt;a href=&quot;https://algorithmia.com/algorithms/lizmrush/GenerateParagraphFromTrigram&quot;&gt;Generate Paragraph From Trigram&lt;/a&gt;, I’ll format the alias like this: &lt;code&gt;algo://&lt;/code&gt; + the algorithm owner + the algorithm name. Thus Generate Paragraph from Trigram would end ups as &lt;code&gt;algo://lizmrush/GenerateParagraphFromTrigram&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/api_keys/algo_restrictions_no_star.png&quot; alt=&quot;caller origin&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;By default, any key can call any algorithm on the platform. You can see in the above screenshot that under the Algorithm Access section, there is an entry &lt;code&gt;algo://*&lt;/code&gt;, which is highlighted. This is a wildcard that matches all of the algorithms. To make sure your key is restricted to calling only the algorithms you’ve specified above, be sure to remove this wildcard entry by clicking on the trashcan icon.&lt;/p&gt;
+
+&lt;h3 id=&quot;caller-origin--hostname&quot;&gt;Caller origin &amp;amp; hostname&lt;/h3&gt;
+
+&lt;p&gt;Another way to customize your API keys and the permissions is to restrict the permissions on where API calls can originate. There are two options you can check in the dialog, native clients and web browser:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/api_keys/call_origin.png&quot; alt=&quot;caller origin&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you are only calling Algorithmia through a client, you can leave that box checked and your key will work as you make API calls. However, if you plan to use this key on a website where you will be making CORS requests, select the web browser permission. When you check that box, another field will appear allowing for more customization:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/api_keys/call_origin_web.png&quot; alt=&quot;caller origin on web&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see, when you allow cross-origin requests to use your authentication, you can restrict the access by referrer hostname. This is a security measure that allows you to say that the API key can only be used when the request is coming from your website.&lt;/p&gt;
+
+&lt;h3 id=&quot;data-api-access&quot;&gt;Data API Access&lt;/h3&gt;
+
+&lt;p&gt;The third method to customize your API key access is to change its permissions relating to the Data API. By default, when you create a new API key data access is set to none.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/api_keys/data_none.png&quot; alt=&quot;data default&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You have two options to change the Data API access: you can either let your API key have permission to read only or to allow read and write access.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/api_keys/data_all.png&quot; alt=&quot;data all&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;By selecting read only, you’ve set up your API key permissions to let it access data in through the API but not write to your data. This is good if you have an application that needs to be able to read a trained model or data file that you’ve stored in order to run the algorithm but won’t be saving any data from the API call.&lt;/p&gt;
+
+&lt;p&gt;When you select read and write, the API key has the ability to both read from your data as well as write to it. For many algorithms, the results can be written to your storage through the Data API and the API key making the call will need the permissions to write. If you are trying to run an algorithm that writes to your data storage but are getting an authentication error, make sure that the API key you are using to authenticate has all the necessary permissions you need.&lt;/p&gt;
+
+
+    </content>
+  </entry>
+  
+  
+</feed>
